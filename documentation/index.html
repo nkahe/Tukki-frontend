@@ -1,0 +1,148 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>tukki-front documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="./" class="navbar-brand">tukki-front documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1>Tukki-tikettijärjestelmän frontend</h1>
+<p><a href="README-en.md">English version of this document</a></p>
+<p>Tämä on Digivertaisverkkohanketta varten toteutetun opetuskäyttöön tarkoitetun Tukki-tikettijärjestelmän frontend. Se on toteutettu <a href="https://angular.io/">Angularilla</a>. Tekemäni tekninen dokumentaatio ja arkkitehtuurin kuvaus löytyy tiedostossa
+<a href="documentation/kuvaus/description.md">documentation/kuvaus/description.md</a>. Compodocilla luotua teknistä dokumentaatiolla voi lukea tietostosta <a href="documentation/index.html">documentation/index.html</a>.</p>
+<p>Ensin on hyvä eritellä, mitä osa-alueita olin tekemässä projektissa ja mitkä olivat toisten tekemiä:</p>
+<h2>Osa-alueet, joita olen tehnyt frontendin osalta</h2>
+<ul>
+<li>Frontend-arkkitehtuuri</li>
+<li>Suuren osan toteutuksesta</li>
+<li>Tekninen dokumentaatio</li>
+<li>Lähes kaikki yksikkötestit</li>
+</ul>
+<h2>Muiden tiimiläisten tekemää</h2>
+<ul>
+<li>Sovelluksen toiminnallisuus- ja käyttöliittymäsuunnittelu</li>
+<li>Osia frontendista: Rich text editori, UKK:n tekeminen kysymyksestä, profiilinäkymä, kysymys-näkymien lisäkentät, tietosuojaselosteen sisältö.</li>
+</ul>
+<h2>Toteutuksen esittely</h2>
+<p><img src="src/assets/screenshots/lista.png" alt="kysymyslista" class="img-responsive"></p>
+<p>Kysymysten listaus on sovelluksen päänäkymä. Tässä näkymä käytettynä Moodle-upotuksen ulkopuolella. Opettajan roolilla kirjautuneena näkyvät kaikki kurssilla opettajille esitetyt kysymykset. Taulukko on tehty Angular Material -kirjastoa hyödyntäen. Rivit voi järjestää eri sarakkeiden mukaan ja niitä voi suodattaa eri kysymysten sisältämien tietojen mukaan. Taulukon sisältö päivittyy ajanjakson välein tai manuaalisesti.</p>
+<p><img src="src/assets/screenshots/lista-en.png" alt="kysymyslista" class="img-responsive"></p>
+<p>Sovelluksessa käytetyn kielen voi vaihtaa englanniksi.</p>
+<p><img src="src/assets/screenshots/login.png" alt="kysymyslista" class="img-responsive"></p>
+<p>Järjestelmään voi kirjautua manuaalisesti tunnuksella ja salasanalla, kun sitä käytetään Moodle-upotuksen ulkopuolella.</p>
+<p><img src="src/assets/screenshots/tiketti.png" alt="uusi kysymys" class="img-responsive"></p>
+<p>Yksittäisen kysymyksen näkymässä käyttäjä voi tarkastella kysymyksen tietoja. Opettaja voi asettaa kysymyksen ratkaistuksi ja kysymyksen lähettäjä voi poistaa tai muokata sitä. Opettajat ja opiskelija voivat lisätä kysymykseen kommentteja, jotka näkyvät kysymyksen alla. Käyttäjät voivat muokata omia kommenttejaan.</p>
+<p><img src="src/assets/screenshots/kommentti.png" alt="kommentti" class="img-responsive"></p>
+<p>Kysymyksen ja kommentin yhteydessä näkyy lähettäjän nimi, rooli, avatar-ikoni ja kommentin lähettämis- ja muokkaamispäivämäärä.</p>
+<p>Kommenttia muokatessa sen voi poistaa, muuttaa kommentin tai tekstin tilaa sekä lisätä tai poistaa liitteitä. Liite-komponentin olen tehnyt itse.</p>
+<p><img src="src/assets/screenshots/progress-bar.png" alt="kommentti" class="img-responsive"></p>
+<p>Tiedostoja lähetetään yhtäaikaisesti ja niiden lähetyksen lähetyksen tila päivitetään edistymispalkeilla. Tässä on käytetty RxJS -kirjastoa.</p>
+<p><img src="src/assets/screenshots/asetukset.png" alt="asetukset" class="img-responsive"></p>
+<p>Kurssilla olevata opettajat voivat muuttaa kurssin asetuksia, ladata ja lisätä usein kysyttyjä kysymyksiä sekä kurssin asetuksia ja kutstua ulkopuolisia osallistumaan kurssille. Lisäkenttien editointi-ikonia valitsemalla avautuu niiden muokkausnäkymä.</p>
+<p><img src="src/assets/screenshots/lisäkenttä.png" alt="asetukset" class="img-responsive"></p>
+<p>Lisäkenttien muokkausnäkymä. Monivalintojen lisääminen on toteutettu Angular Materialin chipseillä.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

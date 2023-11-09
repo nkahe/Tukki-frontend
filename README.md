@@ -1,49 +1,56 @@
-# Tukki
+# Tukki-tikettijärjestelmän frontend
 
-Tämä on Digivertaisverkkohanketta varten toteutetun opetuskäyttöön tarkoitetun Tukki-tikettijärjestelmän web-käyttöliittymä. Web-käyttöliittymä on toteutettu [Angularilla](https://angular.io/). Web-käyttöliittymä kommunikoi erikseen asennettavan palvelimen [Tukki-backend](https://github.com/Digivertaisverkko/UKK-tiketit-backend) kanssa. Web-käyttöliittymän arkkitehtuurin kuvaus löytyy tiedostosta
-[documentation/kuvaus/kuvaus.md](https://github.com/Digivertaisverkko/UKK-tiketit/tree/main/documentation/kuvaus/kuvaus.md).
+[English version of this document](README-en.md)
 
-## Asennus
+Tämä on Digivertaisverkkohanketta varten toteutetun opetuskäyttöön tarkoitetun Tukki-tikettijärjestelmän frontend. Se on toteutettu [Angularilla](https://angular.io/). Tekemäni tekninen dokumentaatio ja arkkitehtuurin kuvaus löytyy tiedostossa
+[documentation/kuvaus/description.md](documentation/kuvaus/description.md). Compodocilla luotua teknistä dokumentaatiolla voi lukea tietostosta [documentation/index.html](documentation/index.html).
 
-Web-käyttöliittymä tarvitsee toimiakseen palvelimen [Tukki-backend](https://github.com/Digivertaisverkko/UKK-tiketit-backend). Katso ohjeet sen asentamiseksi projektin GitHub sivulta. Sieltä löytyy myös ohjeet tämän web-käyttöliittymän ajamiseen yhdessä palvelimen kanssa.
+Ensin on hyvä eritellä, mitä osa-alueita olin tekemässä projektissa ja mitkä olivat toisten tekemiä:
 
-## Kehitysympäristö
+## Osa-alueet, joita olen tehnyt frontendin osalta
 
-Alla on ohjeet miten käytät tätä projektia kehitystyössä. Ohjeet olettavat sinun asentaneen palvelimen [Tukki-backend](https://github.com/Digivertaisverkko/UKK-tiketit-backend) sen ohjeiden mukaan.
+- Frontend-arkkitehtuuri.
+- Suuren osan toteutuksesta.
+- Tekninen dokumentaatio.
+- Lähes kaikki yksikkötestit.
 
-### Asennus kehitysympäristössä
+## Muiden tiimiläisten tekemää
 
-- Asenna nodejs ja npm tietokoneellesi. Projekti on kehitetty käyttäen nodejs versiota 18.
-- Asenna [Angular-CLI](https://angular.io/cli) globaalisti npm:llä komennolla `npm install -g @angular/cli@16.2`. Projektissa käytetty Angularin versio on 16.2.
-- Lataa tai kloonaa tämä repo. Aseta tikettijärjestelmän rajapinnassa ympäristömuuttuja `FRONTEND_DIRECTORY` osoittamaan kyseisessä kansiossa olevaan /dist/tukki-front -hakemistoon. Esimerkiksi `FRONTEND_DIRECTORY=/home/user/UKK-tiketit/dist/tukki-front/`
-- Aja komento `npm ci` asentaaksesi projektin riippuvuudet
-- Aja komento `npm run build` kääntääksesi projektin.
+- Sovelluksen toiminnallisuus- ja käyttöliittymäsuunnittelu.
+- Osia frontendista: Rich text editori, UKK:n tekeminen kysymyksestä, profiilinäkymä, kysymys-näkymien lisäkentät, tietosuojaselosteen sisältö.
 
-### Kääntäminen
+## Toteutuksen esittely
 
-Aja komento `npm run build` kääntääksesi projektin `production` versiona.
+![kysymyslista](src/assets/screenshots/lista.png)
 
-Aja komento `npm run build:dev` kääntääksesi projektin `development` versiona.
+Kysymysten listaus on sovelluksen päänäkymä. Tässä näkymä käytettynä Moodle-upotuksen ulkopuolella. Opettajan roolilla kirjautuneena näkyvät kaikki kurssilla opettajille esitetyt kysymykset. Taulukko on tehty Angular Material -kirjastoa hyödyntäen. Rivit voi järjestää eri sarakkeiden mukaan ja niitä voi suodattaa eri kysymysten sisältämien tietojen mukaan. Taulukon sisältö päivittyy ajanjakson välein tai manuaalisesti.
 
-Aja komento `npm run watch`, jos haluat tehdä kehitystyötä. Tällöin projekti käännetään `development` versiona ja kääntäminen tapahtuu tiedostojen muuttumisen yhteydessä.
+![kysymyslista](src/assets/screenshots/lista-en.png)
 
-Projektin käännetty versio sijaitsee `dist/tukki-front/` hakemistossa.
+Sovelluksessa käytetyn kielen voi vaihtaa englanniksi.
 
-### Testien ajaminen
+![kysymyslista](src/assets/screenshots/login.png)
 
-Aja komento `npm run test` ajaaksesi kaikki projektin testit [Karmalla](https://karma-runner.github.io). Testit sijaitsevat *.spec.ts -tiedostoissa jokaisen komponentin, servicen ja pipen yhteydessä.
+Järjestelmään voi kirjautua manuaalisesti tunnuksella ja salasanalla, kun sitä käytetään Moodle-upotuksen ulkopuolella.
 
-Testejä voi ajaa myös testitiedosto kerrallaan käyttäen `--include` argumenttia. Esimerkiksi SubmitTicketComponent testit voi ajaa komennolla `npm run test --include **/submit-ticket.component.spec.ts`
+![uusi kysymys](src/assets/screenshots/tiketti.png)
 
-Testit ajetaan käyttäen Google Chrome -selainta. Joissain tapauksissa testiympäristö ei havaitse automaattisesti Chromen binaaria ja tällöin joudut asettamaan ympäristömuuttujan `CHROME_BIN`. Esimerkiksi `CHROME_BIN=chromium npm run test`.
+Yksittäisen kysymyksen näkymässä käyttäjä voi tarkastella kysymyksen tietoja. Opettaja voi asettaa kysymyksen ratkaistuksi ja kysymyksen lähettäjä voi poistaa tai muokata sitä. Opettajat ja opiskelija voivat lisätä kysymykseen kommentteja, jotka näkyvät kysymyksen alla. Käyttäjät voivat muokata omia kommenttejaan.
 
-Projektiin on myös määritelty `production` testien ajaminen `npm run test:prod` komennolla, joka ajaa testit argumenteilla `--browsers=ChromeHeadless --watch=false --code-coverage`.
+![kommentti](src/assets/screenshots/kommentti.png)
 
-# Hyödyllisiä linkkejä
+Kysymyksen ja kommentin yhteydessä näkyy lähettäjän nimi, rooli, avatar-ikoni ja kommentin lähettämis- ja muokkaamispäivämäärä.
 
-* [Web-käyttöliittymän käyttöohjeet](https://github.com/Digivertaisverkko/UKK-tiketit/wiki)
-* [Tikettijärjestelmän REST rajapinta](https://github.com/Digivertaisverkko/UKK-tiketit-backend/blob/main/docs/rajapinta/api.md)
-* [Angular - Angular coding style guide](https://angular.io/guide/styleguide#overall-structural-guidelines)
-* [Angular Material UI component library](https://material.angular.io/)
-* [Angular - Testing](https://angular.io/guide/testing)
-* [Testing Angular - A Guide to Robust Angular Applications](https://testing-angular.com/)
+Kommenttia muokatessa sen voi poistaa, muuttaa kommentin tai tekstin tilaa sekä lisätä tai poistaa liitteitä. Liite-komponentin olen tehnyt itse.
+
+![kommentti](src/assets/screenshots/progress-bar.png)
+
+Tiedostoja lähetetään yhtäaikaisesti ja niiden lähetyksen lähetyksen tila päivitetään edistymispalkeilla. Tässä on käytetty RxJS -kirjastoa.
+
+![asetukset](src/assets/screenshots/asetukset.png)
+
+Kurssilla olevata opettajat voivat muuttaa kurssin asetuksia, ladata ja lisätä usein kysyttyjä kysymyksiä sekä kurssin asetuksia ja kutstua ulkopuolisia osallistumaan kurssille. Lisäkenttien editointi-ikonia valitsemalla avautuu niiden muokkausnäkymä.
+
+![asetukset](src/assets/screenshots/lisäkenttä.png)
+
+Lisäkenttien muokkausnäkymä. Monivalintojen lisääminen on toteutettu Angular Materialin chipseillä.

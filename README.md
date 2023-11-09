@@ -2,21 +2,24 @@
 
 [English version of this document](README-en.md)
 
-Tämä on Digivertaisverkkohanketta varten toteutetun opetuskäyttöön tarkoitetun Tukki-tikettijärjestelmän frontend. Se on toteutettu [Angularilla](https://angular.io/). Tekemäni tekninen dokumentaatio ja arkkitehtuurin kuvaus löytyy tiedostossa
-[documentation/kuvaus/description.md](documentation/kuvaus/description.md). Compodocilla luotua teknistä dokumentaatiolla voi lukea tietostosta [documentation/index.html](documentation/index.html).
+Tämä on Digivertaisverkkohanketta varten toteutetun opetuskäyttöön tarkoitetun
+Tukki-tikettijärjestelmän frontend. Se on toteutettu [Angularilla](https://angular.io/).
+Tekemäni dokumentaatio ja arkkitehtuurin kuvaus löytyy tiedostossa
+[documentation/kuvaus/description.md](documentation/kuvaus/description.md). Automaattisesti generoitua teknistä dokumentaatiota voi lukea selaimella
+[tästä linkistä](https://github.com/nkahe/Tukki-frontend/blob/main/documentation/index.html).
 
 Ensin on hyvä eritellä, mitä osa-alueita olin tekemässä projektissa ja mitkä olivat toisten tekemiä:
 
 ## Osa-alueet, joita olen tehnyt frontendin osalta
 
-- Frontend-arkkitehtuuri.
-- Suuren osan toteutuksesta.
-- Tekninen dokumentaatio.
-- Lähes kaikki yksikkötestit.
+- Frontend-arkkitehtuuri
+- Suuren osan toteutuksesta
+- Tekninen dokumentaatio
+- Lähes kaikki yksikkötestit
 
 ## Muiden tiimiläisten tekemää
 
-- Sovelluksen toiminnallisuus- ja käyttöliittymäsuunnittelu.
+- Sovelluksen toiminnallisuus- ja käyttöliittymäsuunnittelu
 - Osia frontendista: Rich text editori, UKK:n tekeminen kysymyksestä, profiilinäkymä, kysymys-näkymien lisäkentät, tietosuojaselosteen sisältö.
 
 ## Toteutuksen esittely

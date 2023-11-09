@@ -101,8 +101,7 @@ Sisältää myös http-interceptor.ts, joka logittaa HTTP-kutsuja.
 
 #### Feature moduulit
 
-Muu sovelluksen toiminnallisuus on ryhmitelty vastuualueittain näihin moduuleihin. 
-okainen shared.modulea lukuunottamatta sisältää niiden toiminnallisuudesta
+Muu sovelluksen toiminnallisuus on ryhmitelty vastuualueittain näihin moduuleihin. Jokainen shared.modulea lukuunottamatta sisältää niiden toiminnallisuudesta
 vastaavan servicen sekä reitityksen määrittelyt.
 
   - **ticket -moduuli** - Tiketteihin eli kysymyksiin liittyviä toiminnallisuus,

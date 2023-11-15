@@ -5,7 +5,7 @@
 Tämä on Digivertaisverkkohanketta varten toteutetun opetuskäyttöön tarkoitetun
 Tukki-tikettijärjestelmän frontend. Se on toteutettu [Angularilla](https://angular.io/).
 Tekemäni dokumentaatio ja arkkitehtuurin kuvaus löytyy tiedostossa
-[documentation/kuvaus/description.md](documentation/kuvaus/description.md). 
+[documentation/kuvaus/description.md](documentation/kuvaus/kuvaus.md). 
 
 Ensin on hyvä eritellä, mitä osa-alueita olin tekemässä projektissa ja mitkä olivat toisten tekemiä:
 

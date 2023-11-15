@@ -1,6 +1,11 @@
 # Tukki web interface description
 
-This document contains a general description of architecture and techniques of the frontend of the Tukki web interface for the program administrator. Document should be kept up to date. In order to understand the document, it would be useful to know the basics Angular's general concepts, such as *module* (or more precisely *ngModule*), *component*, *template* and *service*. You can read about these, for example in
+This document contains a general description of architecture and techniques of
+the frontend of the Tukki web interface for the program administrator. Document
+should be kept up to date. In order to understand the document, it would be
+useful to know the basics Angular's general concepts, such as *module* (or more
+precisely *ngModule*), *component*, *template* and *service*. You can read about
+these, for example in
 [Angular official documentation](https://angular.io/guide/architecture).
 In file names is used
 [Angular recommendations](https://angular.io/guide/styleguide#naming), as well as
@@ -50,13 +55,20 @@ Techniques used to create the web interface. Most of these comes with Angular.
 
 ![Application architecture schematic](Tukki-web-UI-architecture.svg)
 
-The diagram shows the architecture of the application. The image can be viewed in the file documentation/description/Tukki-web-UI-architecture.svg. Arrows between modules point to the module in which it is imported. Between components
+The diagram shows the architecture of the application. The image can be viewed
+in the file documentation/description/Tukki-web-UI-architecture.svg. Arrow
+between modules point to the module in which it is imported. Between components
 the parent component points to the child. The following sections describe
-the application units shown in the figure. Their descriptions are also documented in in their source code files. They can be read from the automatically generated Compodoc -documentation by opening the file documentation/index.html in a web browser. 
+the application units shown in the figure. Their descriptions are also documented
+in in their source code files. They can be read from the automatically generated
+Compodoc -documentation by opening the file documentation/index.html in a web
+browser. 
 
 ## Main modules
 
-The application consists of different Angular main modules, each in its own directory. In addition to these main modules, the different packages contain many modules of their own. The main modules typically contain the following files:
+The application consists of different Angular main modules, each in its own
+directory. In addition to these main modules, the different packages contain
+many modules of their own. The main modules typically contain the following files:
 
 - **\*.module.ts** - Module definitions except for routing definitions.
 - **\*.module.routing.ts** - Routing specifications provided by the module.
@@ -69,15 +81,21 @@ which are exported for use elsewhere in the application.
 
 #### app module
 
-The root module of the application, which is loaded first and where the other modules are defined. Located in the **/src/app** directory. Contains subdirectories for other modules. The components used by the app component are in the core module.
+The root module of the application, which is loaded first and where the other
+modules are defined. Located in the **/src/app** directory. Contains subdirectories
+for other modules. The components used by the app component are in the core module.
 
 #### core module
 
-The core functionality of the application. Imported only in app.module. Contains the components used by the app module, such as *header* and *footer* and common view components such as *home* and *Page not found*, common services like auth.service and error.service. Also includes http-interceptor.ts, which logs HTTP calls.
+The core functionality of the application. Imported only in app.module. Contains
+the components used by the app module, such as *header* and *footer* and common
+view components such as *home* and *Page not found*, common services like auth.service
+and error.service. Also includes http-interceptor.ts, which logs HTTP calls.
 
 #### Feature modules
 
-Other application functionality is grouped by responsibility into these modules.  With the exception of the shared module all modules contains a service file and a routing module.
+Other application functionality is grouped by responsibility into these modules.
+With the exception of the shared module all modules contains a service file and a routing module.
 
   - **ticket module** - Functionality related to tickets / questions,
   such as ticket listing, ticket and FAQ display and handling. Subdirectory
@@ -87,18 +105,28 @@ Other application functionality is grouped by responsibility into these modules.
 - **user module** - User-related functionality, such as the login view,
   display and manipulation of user profiles.
 
-  - **course module** - Course related functionality, such as join course -view, as well as handling of course settings and ticket bases.
+  - **course module** - Course related functionality, such as join course -view,
+  as well as handling of course settings and ticket bases.
 
 #### shared module
 
-Contains features used in several other modules. Common *Material* theme imports are in  separate **material.module** -file. The **components** subdirectory contains many of the components used by different views. The module also contains pipes and directives.
+Contains features used in several other modules. Common *Material* theme imports
+are in  separate **material.module** -file. The **components** subdirectory
+contains many of the components used by different views. The module also contains
+pipes and directives.
 
 
 ## Components
 
-Each component is responsible for a specific part of the user interface. App.module contains a root component *AppComponent*, which serves as the basis for the application view, and on which, depending on the routing, the corresponding view component is rendered.
+Each component is responsible for a specific part of the user interface. App.module
+contains a root component *AppComponent*, which serves as the basis for the 
+pplication view, and on which, depending on the routing, the corresponding view
+component is rendered.
 
-In addition to these components, there are components corresponding to a more limited part of the UI components, such as a header or ticket's comment. Components may contain other components. Components belong to a specific module and are located in their directory in their own subdirectory.
+In addition to these components, there are components corresponding to a more
+limited part of the UI components, such as a header or ticket's comment.
+Components may contain other components. Components belong to a specific module
+and are located in their directory in their own subdirectory.
 
 Component directories usually contain the following files:
 
@@ -115,128 +143,143 @@ Component directories usually contain the following files:
 
 ## Services
 
-Contain functionality that is not directly related to the interface being displayed. All communication with the backend takes place in the services. Common servicet are in the directory
-**/src/app/core/services**, with feature modules each having their own except for the shared.module. The services are in *.service.ts files. In the same directory also contains the corresponding *.service.spec.ts file with the service tests.
+Contain functionality that is not directly related to the interface being
+displayed. All communication with the backend takes place in the services.
+Common servicet are in the directory
+**/src/app/core/services**, with feature modules each having their own except
+for the shared.module. The services are in *.service.ts files. In the same
+directory also contains the corresponding *.service.spec.ts file with the
+service tests.
 
 ### The different services and their responsibilities
 
 #### auth service
 
-Functionality related to user authentication, such as logging in and processing of related data. These include, for example, the status of the login and the logged-in information about the user. The information is retrieved from the server and always set in store service whenever the routing changes. Users are identified by cookies, which are used to automatically from a web interface perspective.
+Functionality related to user authentication, such as logging in and processing
+of related data. These include, for example, the status of the login and the
+logged-in information about the user. The information is retrieved from the
+server and always set in store service whenever the routing changes. Users are
+identified by cookies, which are used to automatically from a web interface
+perspective.
 
 #### store service
 
-This is where global, session-time information about RxJS behavior subjects is stored, which is intended to be available to all components and services. Such information is, for example, the logged-in user information.
+This is where global, session-time information about RxJS behavior subjects is
+stored, which is intended to be available to all components and services. Such
+information is, for example, the logged-in user information.
 [Information stored over sessions](#information-stored-over-sessions).
 
 #### error service
 
-Errors in the services are first passed here, where they are logged with console.log. 403 i.e. *No rights* error conditions are routed from here to the corresponding error view. Errors are re-thrown, allowing components to catch them and present them to the user or take other actions if necessary. The service also has the possibility to generate errors for testing purposes. HTTP calls are logged by *http-interceptor*.
+Errors in the services are first passed here, where they are logged with
+console.log. 403 i.e. *No rights* error conditions are routed from here to the
+corresponding error view. Errors are re-thrown, allowing components to catch
+them and present them to the user or take other actions if necessary. The
+service also has the possibility to generate errors for testing purposes.
+HTTP calls are logged by *http-interceptor*.
 
 #### utils service
 
-Utility functions that are not directly related to the responsibilities of other services.
+Utility functions that are not directly related to the responsibilities of other
+services.
 
 ### Feature module services
 
 #### ticket service
 
-Handles functionality related to tickets, i.e. questions, such as handling tickets and their comments and attachments.
+Handles functionality related to tickets, i.e. questions, such as handling
+tickets and their comments and attachments.
 
 #### course service
 
-Handles functionalities related to courses, such as course retrieval, handling ticket bases and importing and exporting course data to files.
+Handles functionalities related to courses, such as course retrieval, handling
+ticket bases and importing and exporting course data to files.
 
 #### user service
 
-Handles the processing of user profile data on the server such as settings, data upload and data deletion.
+Handles the processing of user profile data on the server such as settings,
+data upload and data deletion.
 
 
 ## Communication between parts
 
-Communication between parent and child components is done mainly with direct Angular's @Input and @Output decorators. Global, session-wide state is stored in the [store service](#storeservice) behavior subjects via method calls. Entities injecting these services receive this information via method calls, which return typically observables. Global state is for example the state of login and messages passed between components that are not direct relatives.
+Communication between parent and child components is done mainly with direct
+Angular's @Input and @Output decorators. Global, session-wide state is stored in
+the [store service](#storeservice) behavior subjects via method calls. Entities
+injecting these services receive this information via method calls, which return
+typically observables. Global state is for example the state of login and
+messages passed between components that are not direct relatives.
 
-Components communicate other information to services via method calls and receive return values, which typically are promises. Information stored across sessions is stored in local storage, which can be found in documentation/description/local-storage.md. This is not used much in the application.
+Components communicate other information to services via method calls and receive
+return values, which typically are promises. Information stored across sessions
+is stored in local storage, which can be found in documentation/description/local-storage.md.
+This is not used much in the application.
 
-## Teema ja tyylit
+## Theme and styles
 
-Tyylimäärittelyissä käytetään [SASS / SCSS:ää.](https://sass-lang.com/). Yleiset
-tyylimäärittelyt ovat hakemistossa **src/styles/**. Sovellus käyttää
-[Angular Material](https://material.angular.io/) -kirjaston kustomoitua teemaa,
-jonka määrittelyt ovat tiedostossa
-**custom-theme.scss**. [Tietoa teeman muokkaamisesta](https://material.angular.io/guide/theming).
+Style definitions use [SASS/SCSS.](https://sass-lang.com/). General
+style definitions are in the **src/styles/** directory. The application uses
+[Angular Material](https://material.angular.io/) library's custom theme,
+whose specifications are in the file **custom-theme.scss**.
+[About customizing the theme](https://material.angular.io/guide/theming).
 
-Kaikkiin templateihin vaikuttavat määrittelyt ovat tiedostossa **styles.scss**.
-Se sisältää kaikkialla sovelluksessa käytettyjä CSS -luokkia, joiden nimet ovat
-*.theme-* -alkuisia. **variables.scss** sisältää joitain globaaleja variableja,
-jotka voi importoida tarvittaessa komponenttien tyylitiedostoissa. Niissä
-sijaitsevat komponenttikohtaiset tyylit.
+The specifications affecting all templates are in **styles.scss**.
+It contains the CSS classes used throughout the application, whose names are
+*.theme-*. **variables.scss** contains some global variables,
+which can be imported into component style files as needed. They contain
+component-specific styles.
 
-Tyylimäärittelysäännöt on pyritty esittämään SCSS-tiedostoissa siinä järjestyksessä
-kuin niihin viittaavat elementit ovat komponentin templatessa. Mahdolliset
-media queryt ovat tiedoston lopussa.
+The style definition rules are presented in the SCSS files in the order in which
+the elements they are referring appear in component templates. Possible media
+queries are at the end of the files.
 
+## Language and translations
 
-## Kieli ja käännökset
+In Angular, translations can be done natively in two different ways: at build
+time or at runtime. In this application, the latter is used. The language is
+fetched and initialized at startup in the file **src/app/app.initializers.ts**.
+Changing the translation at runtime always causes the application to restart.
+This is normal. Language selection logic to be checked in this order
+at application initialization:
+1. Selected by the user through the menu.
+2. Set as a URL parameter. Usually in the LTI path when embedded.
+3. Default, which while embedded is English and otherwise Finnish.
 
-Angularissa käännökset voidaan natiivisti tehdä kahdella eri tavalla: yleisemmin
-build-aikana tai ajonaikaisesti. Tässä sovelluksessa noudatetaan jälkimmäistä tapaa.
-Kieli haetaan ja alustetaan ohjelman käynnistyessä tiedostossa **src/app/app.initializers.ts**.
-Käännöksen vaihtaminen ajon aikana aiheuttaa aina sovelluksen uudelleenkäynnistyksen.
-Tämä on normaalia. Kielen valinnan logiikka, joka tarkistetaan tässä järjestyksessä
-sovelluksen alustuksessa:
-1. Käyttäjän valikon kautta valitsema.
-2. URL-parametrina asetettu. Yleensä LTI-kautta upotuksessa.
-3. Oletus, joka upotuksessa on englanti ja muulloin suomi.
+The English translations are located in the
+file **src/assets/en-US.json**. The translations are in the format:
 
-Englanninkieliset käännökset sijaitsevat
-tiedostossa **src/assets/en-US.json**. Käännökset ovat muodossa:
+  ```"Finnish translation key": "English translation"```
 
-  ```"Suomenkielinen käännösavain": "Englanninkielinen käännös"```
-
-Suomenkielinen, alkuperäinen teksti on komponenttien templateissa tai komponentin
-koodissa. Käännös haetaan käännösavaimeen viittaamalla. Templatessa tämä tapahtuu
-yleensä *i18n* - tai sen alkuisella alkuisella tunnisteella tai Angularin
-interpolaatiolla komponentin muuttujaan, jossa käännös tapahtuu yleensä
-[$localize](https://angular.io/api/localize) -funktiolla.
-
-
-## Tietosuojaseloste
-
-Tukki-tikettijärjestelmän tietosuojaseloste sijaitsee tiedostossa 
-**src/app/core/footer/privacy-modal/privacy-modal.component.html**. Oletuksena
-tietosuojaseloste sisältää Digivertaisverkko-hankkeen oman tietosuojaselosteen.
-Jos järjestelmä otetaan muualla käyttöön, niin tietosuojaseloste tulee muokata
-sisältämään käyttöönottaneen organisaation tiedot.
+The Finnish, original text is in the component template or in the component's
+code. The translation is retrieved by referring to the translation key. In
+templates this is done usually with tag *i18n*  or with Angular's interpolation
+to a component variable, where the translation is usually done by [$localize](https://angular.io/api/localize)
+function.
 
 
-## Projektin hakemistorakenne
+## Project directory structure
 
-Tärkeitä tai huomionarvoisia  tiedostoja ja hakemistoja.
+Important or noteworthy files and directories.
 
-- **angular.json** - [Angularin asetuksia](https://angular.io/guide/workspace-config).
-Mm. eri tiedostojen sijaintien määrittely.
-- **package.json** - [Node.js -asetukset](https://angular.io/guide/npm-packages),
-kuten npm -skriptien määrittelyt ja pakettiriippuvuudet.
-- **tsconfig.json** - [TypeScript -käännösasetukset](https://angular.io/guide/typescript-configuration). 
-- **documentation/** - [Compodocilla](https://compodoc.app/) generoitu dokumentaatio.
-- **.eslintrc.json** - ESLint asetukset.
-  - **index.html** - Avaamalla tämän tiedoston selaimella voi lukea dokumentaatiota.
-  - **kuvaus/** - Hakemisto, jossa kuvailevaa dokumentaatiota:
-    - **kuvaus.md** - Tämä tiedosto.
-    - **local-storage.md** - Local storageen tallennettavat muuttujat.
-- **src/** - Sovelluksen lähdekoodi.
-  - **app/** - [App moduulin](#app--moduuli) hakemisto. Sisältää myös muiden
-  moduulien alihakemistot.
-  - **assets/** - Logot, ikonit ja [käännökset](#kieli-ja-käännökset).
-  - **styles/** - Teeman määrittely ja globaalit [tyylimäärittelyt](#teema-ja-tyylit).
-  - **main.ts** - Täällä asetettu, että production buildissa ei näytetä logeja.
-  - **index.html** - Sovelluksen selain-title, fonttien, faviconin osoitteet,
-  sekä mitä näytetään, jos selaimessa ei ole JavaScript -käytössä.
-  - **environments/** - Environment -variablet. Sisältää sovelluksen nimen ja
-  base URL:n. Tiedostot:
-    - **environments.ts** - Development build:lle.
-    - **environments.prod.ts** - Production build:lle.
+- **angular.json** - [Angular settings](https://angular.io/guide/workspace-config). For example, defining the locations of different files.
+- **package.json** - [Node.js options](https://angular.io/guide/npm-packages), such as npm script definitions and package dependencies.
+- **tsconfig.json** - [TypeScript compiler settings](https://angular.io/guide/typescript-configuration). 
+- **documentation/** - Documentation generated by [Compodoc](https://compodoc.app/).
+- **.eslintrc.json** - ESLint settings.
+  - **index.html** - Open this file in browser to read the documentation.
+  - **description/** - Directory containing descriptive documentation:
+    - **description.md** - This file.
+    - **local-storage.md** - Variables to be stored in local storage.
+- **src/** - Application source code.
+  - **app/** - [App module](#app--module) directory. Also contains other   subdirectories of other modules.
+  - **assets/** - Logos, icons and [translations](#languages-and-translations).
+  - **styles/** - Theme definition and global [style definitions](#theme-and-styles).
+  - **main.ts** - Set here to not show logs in production build.
+  - **index.html** - Application browser title, fonts, favicon addresses,
+  and what to show if the browser does not have JavaScript enabled.
+  - **environments/** - Environment variable. Contains the application name and  base URL. Files:
+    - **environments.ts** - For the development build.
+    - **environments.prod.ts** - For the production build.
 
 ## Uusien testien tekeminen
 
@@ -283,8 +326,9 @@ production buildissa. Tällöin mm. kaikki HTTP-kutsut logitetaan.
 
 Jos kyseessä on Angular Materialin -elementti, voi tämä johtua muutoksesta
 Angularin generoimassa CSS-luokkien nimissä. Tyylitiedostot sisältävät joitain
-muokkauksia, joissa käytetään näitä luokkia. Esimerkkinä alla *listing* -komponentin
-tyylitiedosto muuttaa taulukon sarakkeen otsikon väriä, jonka mukaan lajittelu tehdään.
+muokkauksia, joissa käytetään näitä luokkia. Esimerkkinä alla *listing*
+-komponentin tyylitiedosto muuttaa taulukon sarakkeen otsikon väriä, jonka
+mukaan lajittelu tehdään.
 
 ```
 :host ::ng-deep .mat-sort-header-content {

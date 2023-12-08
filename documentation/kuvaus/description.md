@@ -24,7 +24,6 @@ In file names is used
 - [Creating new tests](#create-new-tests)
 - [ESLint](#eslint)
 - [Programming style](#programming-style)
-- [Troubleshooting](#troubleshooting)
 
 
 ## Techniques used
@@ -281,74 +280,32 @@ Important or noteworthy files and directories.
     - **environments.ts** - For the development build.
     - **environments.prod.ts** - For the production build.
 
-## Uusien testien tekeminen
+# Making new tests
 
-- Komponenttitesteissä servicen palauttama data ja servicetesteissä palvelimen
-palauttama on hyvä laittaa moduulin [moduuli nimi].dummydata.ts -tiedostoon ja
-käyttää oikeita interfaceja [moduulin nimi].models.ts -tiedostoista.
-- Käyttäjätietoja on saatavilla auth.dummydata.ts -tiedostosta.
-- Jos testattava yksikkö käyttää store servicen -tietoja, on hyvä injektoida
-testissä oikeaa service ja tallentaa haluttu data sinne.
-- Usein on helpointa käyttää funktioita fakeAsync ja tick.
-- Näkymän päivitys voi joissain komponenteissa tarvita toisen detectChanges -
-kutsun.
+- In component tests, data returned by the service and in service tests, data
+returned by the server should be put in the module [module name].dummydata.ts file and
+use the correct interfaces from the [module name].models.ts files.
+- User data is available in auth.dummydata.ts file.
+- If the unit under test uses store service data, it is recommended to inject
+the real service in the test and store the desired data there.
+- It is often easiest to use the functions fakeAsync and tick.
+- Updating the view may require another detectChanges -call.
 
 ## ESLint
 
-- ESLintillä tehdään virheiden etsintää staattisella koodinanalyysillä.
-- Voi ajaa komennolla: "ng lint" tai "npm run lint" tai käyttää koodieditorilla (voi tarvita ESLint -pluginin).
-- Asetukset: /.eslintrc.json.
-  - Voi halutessa määritellä uusia sääntöjä.
+- ESLint is used for error detection using static code analysis.
+- Can be run with "ng lint" or "npm run lint" or run with a code editor (may require ESLint plugin).
+- Settings: /.eslintrc.json.
+  - Can define new rules if desired.
 
-## Ohjelmointityyli
+## Programming style
 
-- Pyritään noudattamaan yleisiä Angular, HTML, CSS/SCSS ja Typescript -tyyli-
-suosituksia.
-- Rivin pituus pyritään rajoittaa 80 merkkiin ja voivat olla enintään 90 merkkiä
-käännöksiä lukuunottamatta.
-- Jos HTML-elementtien määrittelyt ovat pituudeltaan yli tämän rajan,
-järjestetään ne allekkain 1 per rivi aakkosjärjestyksessä.
-- SCSS -attribuutit aakkosjärjestyksessä.
-- **/.editorconfig** sisältää yleisimpiä asetuksia, osalla editoreista tämän
-käyttäminen vaatii pluginin. Kkts. [editorconfig.org/](https://editorconfig.org/)
-
-## Vianmääritys
-
-### Virhetilanteissa
-
-- Tarkista, ilmeneekö virheitä automaattitesteissä.
-- Tarkkaile virheilmoituksia selainkonsolissa / browser console:ssa. Developer
-buildissa myös tavalliset console.log -logitukset ovat käytössä toisin kuin
-production buildissa. Tällöin mm. kaikki HTTP-kutsut logitetaan.
-  - Lisää tarvittaessa omia console.log -logituksia.
-
-### Jokin elementti näyttää päivityksen jälkeen väärältä
-
-Jos kyseessä on Angular Materialin -elementti, voi tämä johtua muutoksesta
-Angularin generoimassa CSS-luokkien nimissä. Tyylitiedostot sisältävät joitain
-muokkauksia, joissa käytetään näitä luokkia. Esimerkkinä alla *listing*
--komponentin tyylitiedosto muuttaa taulukon sarakkeen otsikon väriä, jonka
-mukaan lajittelu tehdään.
-
-```
-:host ::ng-deep .mat-sort-header-content {
-  color: #595959;
-}
-```
-*.mat-sort-header-content* on Angularin generoima luokka, jota ei ole templatessa.
-Pelkästään templatessa oleviin elementteihin viittaamalla ei näissä tapauksissa
-saataisi haluttua vaikutusta. Niihin viittaaminen voi vaatia toimiakseen
-**::ng-deep** -yhdistäjän. Jos tämä määritys lakkaisi toimimasta, kannattaa
-ensimmäisenä tarkastaa selaimen kehittäjätyökalulla, onko nimeämisessä tai
-elementin rakenteessa tapahtunut muutoksia. 
-
-### Child komponentin sisältö ei päivity kun pitäisi
-
-Jos komponentin *.component.ts -tiedostossa on määritelty:
-
-```changeDetection: ChangeDetectionStrategy.OnPush```
-
-niin esimerkiksi observabjela kuunneltaessa näkymän päivittyminen pitää
-tehdä manuaalisesti ChangeDetectorRef -luokan olion detectChanges() metodikutsulla.
-
-[Takaisin alkuun](#tukki-web-käyttöliittymän-kuvaus)
+- Aim to comply common Angular, HTML, CSS/SCSS and Typescript style guides and
+recommendations.
+- Line lengths have soft limit of 80 characters and hard limit of 90 characters
+except for translations.
+- If HTML element specifications are longer than this limit,
+they will be ordered 1 per line, alphabetically.
+- SCSS attributes in alphabetical order.
+- **/.editorconfig** contains the most common settings, some editors have this
+requires a plugin to use. See [editorconfig.org/](https://editorconfig.org/)

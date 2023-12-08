@@ -52,7 +52,7 @@ Techniques used to create the web interface. Most of these comes with Angular.
 
 ## Application architecture
 
-![Application architecture schematic](Tukki-web-UI-architecture.svg)
+![Application architecture schematic](Tukki-web-UI-arkkitehtuuri.svg)
 
 The diagram shows the architecture of the application. The image can be viewed
 in the file documentation/description/Tukki-web-UI-architecture.svg. Arrow

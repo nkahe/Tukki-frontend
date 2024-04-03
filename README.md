@@ -1,4 +1,4 @@
-# Tukki -tikettijärjestelmän frontend
+# Tukki -tikettijärjestelmän front-end
 
 Tämä on [Digivertaisverkkohanketta](http://interact.oulu.fi/site/digivertaisverkko) varten toteutetun opetuskäyttöön tarkoitetun Tukki-tikettijärjestelmän web -front-end. Se on toteutettu käyttäen [Angular 16](https://angular.io/) -ohjelmistokehystä. Front-end kommunikoi erikseen asennettavan palvelimen [Tukki-backend](https://github.com/Digivertaisverkko/UKK-tiketit-backend) kanssa. Frontendin arkkitehtuurin kuvaus on luettavissa suomeksi tästä linkistä:
 [documentation/kuvaus/kuvaus.md](https://github.com/nkahe/Tukki-frontend/tree/main/documentation/kuvaus/kuvaus.md).
